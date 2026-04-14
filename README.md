@@ -194,9 +194,3 @@ GitHub: [https://github.com/1dxrobot](https://ithub.com/1dxrobot)
 ## 📄 License
 
 This project is licensed under the MIT License.
-
-```
-
-
-Pick one.
-```

@@ -197,9 +197,6 @@ This project is licensed under the MIT License.
 
 ```
 
-If you want next level:
-- I can **deploy this on Render step-by-step**
-- Or add **badges + animations + screenshots that actually convert recruiters**
 
 Pick one.
 ```

@@ -14,9 +14,10 @@
 
 ##  Preview
 
- <img width="1917" height="903" alt="Screenshot 2026-04-14 093921" src="https://github.com/user-attachments/assets/30fa0d5b-b947-4799-9790-08434f0aa060" />   | Dashboard |
-<img width="1916" height="910" alt="Screenshot 2026-04-14 093946" src="https://github.com/user-attachments/assets/f9f2136d-a286-4875-9ea5-2d68b3f6e83b" />    | Encryption |
-<img width="1080" height="761" alt="Screenshot 2026-04-14 094618" src="https://github.com/user-attachments/assets/fbfdfec7-7d8b-4f43-bb3f-13b8bd8ae06d" />    | Authentication |
+| Dashboard | Encryption | Authentication |
+Encryption.png
+Authentication.png
+Dashboard.png
 
 ---
 

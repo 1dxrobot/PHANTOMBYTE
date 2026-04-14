@@ -14,8 +14,6 @@ PhantomByte enables secure handling of sensitive data through authenticated acce
 
 ## Project Structure
 
-```
-
 PhantomByte/
 ├── app.py                    # Flask backend (routes, logic, authentication, encryption)
 ├── requirements.txt          # Python dependencies
@@ -28,11 +26,10 @@ PhantomByte/
 │   ├── reset_password.html
 │   └── index.html            # Main dashboard
 └── static/
-├── css/style.css         # UI styling
-└── js/main.js            # Frontend logic
-
-````
-
+    ├── css/
+    │   └── style.css         # UI styling
+    └── js/
+        └── main.js           # Frontend logic
 ---
 
 ## Setup

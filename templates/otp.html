@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhantomByte — OTP Verification</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <div class="grid-bg"></div>
+
+  <div class="auth-page">
+    <div class="auth-container">
+
+      <div class="auth-header">
+        <a href="/login" class="logo">
+          <span class="logo-hex">⬡</span> PHANTOMBYTE
+        </a>
+        <p>// TWO-FACTOR VERIFICATION</p>
+      </div>
+
+      <div class="card auth-card" style="text-align:center;">
+        <div class="corner-tl"></div><div class="corner-tr"></div>
+        <div class="corner-bl"></div><div class="corner-br"></div>
+
+        <div style="font-size:3rem;margin-bottom:12px;">🔐</div>
+        <h2 style="margin-bottom:10px;">// OTP VERIFICATION</h2>
+        <p style="font-family:var(--font-mono);font-size:0.78rem;color:whitesmoke;margin-bottom:4px;">
+          A 6-digit code has been sent to your email.
+        </p>
+        <p style="font-family:var(--font-mono);font-size:0.72rem;color:whitesmoke;margin-bottom:24px;">
+          CODE EXPIRES IN <span style="color:var(--amber)">10 MINUTES</span>
+        </p>
+
+        <div id="alert" class="alert"></div>
+
+        <form id="otp-form">
+          <div class="otp-inputs">
+            <input type="text" maxlength="1" inputmode="numeric" autocomplete="one-time-code">
+            <input type="text" maxlength="1" inputmode="numeric">
+            <input type="text" maxlength="1" inputmode="numeric">
+            <input type="text" maxlength="1" inputmode="numeric">
+            <input type="text" maxlength="1" inputmode="numeric">
+            <input type="text" maxlength="1" inputmode="numeric">
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            VERIFY OTP
+          </button>
+        </form>
+
+        <div class="auth-links" style="margin-top:20px;">
+          <p>DIDN'T RECEIVE CODE? <a href="/signup">RESEND →</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

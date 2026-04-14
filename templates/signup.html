@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhantomByte — Sign Up</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <div class="grid-bg"></div>
+
+  <div class="auth-page">
+    <div class="auth-container" style="max-width:520px;">
+
+      <div class="auth-header">
+        <a href="/login" class="logo">
+          <span class="logo-hex">⬡</span> PHANTOMBYTE
+        </a>
+        <p>// REGISTER NEW AGENT</p>
+      </div>
+
+      <div class="card auth-card">
+        <div class="corner-tl"></div><div class="corner-tr"></div>
+        <div class="corner-bl"></div><div class="corner-br"></div>
+
+        <h2>// CREATE ACCOUNT</h2>
+
+        <div id="alert" class="alert"></div>
+
+        <form id="signup-form" autocomplete="off">
+
+          <div class="field">
+            <label for="username">▸ USERNAME</label>
+            <input type="text" id="username" name="username"
+                   placeholder="agent_handle" required>
+          </div>
+
+          <div class="field">
+            <label for="email">▸ EMAIL ADDRESS</label>
+            <input type="email" id="email" name="email"
+                   placeholder="agent@domain.com" required>
+          </div>
+
+          <div class="field">
+            <label for="password">▸ PASSWORD</label>
+            <input type="password" id="password" name="password"
+                   placeholder="Create strong password" required>
+
+            <div class="pw-strength">
+              <div class="pw-bar">
+                <div class="pw-bar-fill" id="pw-bar-fill"></div>
+              </div>
+              <div class="pw-rules">
+                <span class="pw-rule" id="rule-upper">Uppercase letter</span>
+                <span class="pw-rule" id="rule-lower">Lowercase letter</span>
+                <span class="pw-rule" id="rule-number">Number (0-9)</span>
+                <span class="pw-rule" id="rule-special">Special character</span>
+                <span class="pw-rule" id="rule-length">Min. 8 characters</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="confirm_password">▸ CONFIRM PASSWORD</label>
+            <input type="password" id="confirm_password" name="confirm_password"
+                   placeholder="Repeat password" required>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-primary" style="margin-top:8px;">
+            CREATE ACCOUNT
+          </button>
+        </form>
+
+        <div class="auth-links">
+          <p>ALREADY REGISTERED? <a href="/login">LOGIN →</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhantomByte — Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <div class="grid-bg"></div>
+
+  <div class="auth-page">
+    <div class="auth-container">
+
+      <div class="auth-header">
+        <a href="#" class="logo">
+          <span class="logo-hex">⬡</span> PHANTOMBYTE
+        </a>
+        <p>// SECURE ENCRYPTION SYSTEM v2.0</p>
+      </div>
+
+      <div class="card auth-card">
+        <div class="corner-tl"></div><div class="corner-tr"></div>
+        <div class="corner-bl"></div><div class="corner-br"></div>
+
+        <h2>// SYSTEM ACCESS</h2>
+
+        <div id="alert" class="alert"></div>
+
+        <form id="login-form" autocomplete="off">
+          <div class="field">
+            <label for="identifier">▸ EMAIL OR USERNAME</label>
+            <input type="text" id="identifier" name="identifier"
+                   placeholder="enter@email.com or username" required>
+          </div>
+
+          <div class="field">
+            <label for="password">▸ PASSWORD</label>
+            <input type="password" id="password" name="password"
+                   placeholder="••••••••••••" required>
+          </div>
+
+          <div style="text-align:right; margin-bottom:20px;">
+            <a href="/forgot-password" style="font-family:var(--font-mono);font-size:0.75rem;color:white;text-decoration:none;">
+              FORGOT PASSWORD?
+            </a>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            ACCESS SYSTEM
+          </button>
+        </form>
+
+        <div class="auth-links">
+          <p>NEW USER? <a href="/signup">CREATE ACCOUNT →</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

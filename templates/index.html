@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhantomByte — Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .tab-content { display: none; }
+    .tab-content:first-of-type { display: block; }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <div class="grid-bg"></div>
+
+  <!-- ── Navbar ──────────────────────────────────────────────────── -->
+  <nav class="navbar">
+    <a class="logo" href="/home">
+      <span class="logo-hex">⬡</span> PHANTOMBYTE
+    </a>
+    <div class="nav-right">
+      <span class="font-mono" style="color:whitesmoke;font-size:0.72rem;">
+        AGENT:
+      </span>
+      <span class="nav-user">{{ username }}</span>
+      <a href="/api/logout" class="nav-logout">LOGOUT</a>
+    </div>
+  </nav>
+
+  <!-- ── Welcome Banner ──────────────────────────────────────────── -->
+  {% if welcome == 'new_user' %}
+  <div class="welcome-banner new-user">
+    <span>⚡</span>
+    <span class="font-mono">WELCOME, NEW USER <strong>{{ username }}</strong>! YOUR ACCOUNT IS NOW ACTIVE.</span>
+  </div>
+  {% else %}
+  <div class="welcome-banner returning">
+    <span>✦</span>
+    <span class="font-mono">WELCOME BACK, <strong>{{ username }}</strong>. SYSTEM READY.</span>
+  </div>
+  {% endif %}
+
+  <!-- ── Main Content ─────────────────────────────────────────────── -->
+  <main class="home-main" style="position:relative;z-index:1;">
+
+    <div class="home-title">
+      <h1 class="glitch" data-text="CRYPTO ENGINE">CRYPTO ENGINE</h1>
+      <p>// FERNET AES-128 SYMMETRIC ENCRYPTION — TEXT · FILE · IMAGE</p>
+    </div>
+
+    <div class="panels">
+
+      <!-- ════════════════════════════════════
+           ENCRYPT PANEL
+           ════════════════════════════════════ -->
+      <div class="card panel panel-encrypt" id="enc-panel">
+        <div class="corner-tl"></div><div class="corner-tr"></div>
+        <div class="corner-bl"></div><div class="corner-br"></div>
+
+        <div class="panel-header">
+          <div class="panel-icon">🔒</div>
+          <div>
+            <h2>ENCRYPT</h2>
+            <p class="font-mono" style="font-size:0.68rem;color:whitesmoke;">INPUT → CIPHERTEXT</p>
+          </div>
+        </div>
+
+        <!-- Mode Tabs -->
+        <div class="mode-tabs">
+          <button class="mode-tab active-enc" data-mode="text">📝 TEXT</button>
+          <button class="mode-tab" data-mode="file">📄 FILE</button>
+          <button class="mode-tab" data-mode="image">🖼 IMAGE</button>
+        </div>
+
+        <!-- TEXT mode -->
+        <div class="mode-content" id="enc-panel-text">
+          <textarea id="enc-text" placeholder="// Paste or type plaintext here...
+// Supports any UTF-8 text content."></textarea>
+        </div>
+
+        <!-- FILE mode -->
+        <div class="mode-content" id="enc-panel-file" style="display:none;">
+          <div class="upload-zone">
+            <input type="file" id="enc-file-file" accept=".txt,.pdf,.docx,.csv,.json,.xml,.md">
+            <div class="upload-icon">📁</div>
+            <p>DRAG & DROP FILE OR CLICK TO BROWSE</p>
+            <p style="font-size:0.65rem;margin-top:4px;">TXT · PDF · DOCX · CSV · JSON · XML</p>
+            <p class="file-name"></p>
+          </div>
+        </div>
+
+        <!-- IMAGE mode -->
+        <div class="mode-content" id="enc-panel-image" style="display:none;">
+          <div class="upload-zone">
+            <input type="file" id="enc-file-image" accept="image/*">
+            <div class="upload-icon">🖼</div>
+            <p>DRAG & DROP IMAGE OR CLICK TO BROWSE</p>
+            <p style="font-size:0.65rem;margin-top:4px;">JPG · PNG · WEBP · GIF · BMP</p>
+            <p class="file-name"></p>
+          </div>
+          <img class="img-preview" alt="Preview">
+        </div>
+
+        <div id="enc-alert" class="alert" style="margin-top:14px;"></div>
+
+        <!-- Action buttons -->
+        <div style="display:flex;gap:8px;margin-top:14px;">
+          <button id="encrypt-btn" class="btn btn-primary" style="flex:1;">ENCRYPT</button>
+          <button id="enc-clear" class="btn btn-sm" style="background:transparent;color:whitesmoke;border:1px solid var(--border);width:auto;padding:8px 16px;font-family:var(--font-mono);font-size:0.72rem;cursor:pointer;border-radius:3px;">CLEAR</button>
+        </div>
+
+        <!-- Result -->
+        <div class="result-box" id="enc-result">
+          <label>▸ ENCRYPTED OUTPUT</label>
+          <div class="result-text" id="enc-result-text"></div>
+          <div class="result-actions">
+            <button id="enc-copy" class="btn btn-sm" style="background:transparent;color:var(--cyan);border:1px solid rgba(0,245,255,0.3);font-family:var(--font-mono);font-size:0.7rem;cursor:pointer;border-radius:3px;padding:6px 14px;">COPY</button>
+            <button id="enc-download" class="btn btn-sm" style="background:transparent;color:var(--green);border:1px solid rgba(57,255,20,0.3);font-family:var(--font-mono);font-size:0.7rem;cursor:pointer;border-radius:3px;padding:6px 14px;">DOWNLOAD</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ════════════════════════════════════
+           DECRYPT PANEL
+           ════════════════════════════════════ -->
+      <div class="card panel panel-decrypt" id="dec-panel">
+        <div class="corner-tl" style="border-color:var(--green);"></div>
+        <div class="corner-tr" style="border-color:var(--green);"></div>
+        <div class="corner-bl" style="border-color:var(--green);"></div>
+        <div class="corner-br" style="border-color:var(--green);"></div>
+
+        <div class="panel-header">
+          <div class="panel-icon">🔓</div>
+          <div>
+            <h2>DECRYPT</h2>
+            <p class="font-mono" style="font-size:0.68rem;color:whitesmoke;">CIPHERTEXT → OUTPUT</p>
+          </div>
+        </div>
+
+        <!-- Mode Tabs -->
+        <div class="mode-tabs">
+          <button class="mode-tab active-dec" data-mode="text">📝 TEXT</button>
+          <button class="mode-tab" data-mode="file">📄 FILE</button>
+          <button class="mode-tab" data-mode="image">🖼 IMAGE</button>
+        </div>
+
+        <!-- TEXT mode -->
+        <div class="mode-content" id="dec-panel-text">
+          <textarea id="dec-text" placeholder="// Paste encrypted ciphertext here...
+// Must be a valid PhantomByte-encrypted token."></textarea>
+        </div>
+
+        <!-- FILE mode -->
+        <div class="mode-content" id="dec-panel-file" style="display:none;">
+          <div class="upload-zone">
+            <input type="file" id="dec-file-file" accept="*/*">
+            <div class="upload-icon">📁</div>
+            <p>DRAG & DROP ENCRYPTED FILE OR CLICK TO BROWSE</p>
+            <p style="font-size:0.65rem;margin-top:4px;">Upload the file containing base64-encoded encrypted data</p>
+            <p class="file-name"></p>
+          </div>
+        </div>
+
+        <!-- IMAGE mode -->
+        <div class="mode-content" id="dec-panel-image" style="display:none;">
+          <div class="upload-zone">
+            <input type="file" id="dec-file-image" accept="*/*">
+            <div class="upload-icon">🖼</div>
+            <p>DRAG & DROP ENCRYPTED IMAGE FILE</p>
+            <p style="font-size:0.65rem;margin-top:4px;">Upload file containing base64-encoded encrypted image data</p>
+            <p class="file-name"></p>
+          </div>
+        </div>
+
+        <div id="dec-alert" class="alert" style="margin-top:14px;"></div>
+
+        <!-- Action buttons -->
+        <div style="display:flex;gap:8px;margin-top:14px;">
+          <button id="decrypt-btn" class="btn btn-green" style="flex:1;">DECRYPT</button>
+          <button id="dec-clear" class="btn btn-sm" style="background:transparent;color:whitesmoke;border:1px solid var(--border);width:auto;padding:8px 16px;font-family:var(--font-mono);font-size:0.72rem;cursor:pointer;border-radius:3px;">CLEAR</button>
+        </div>
+
+        <!-- Result -->
+        <div class="result-box" id="dec-result" style="border-color:rgba(57,255,20,0.2);">
+          <label style="color:var(--green-dim);">▸ DECRYPTED OUTPUT</label>
+          <div class="result-text" id="dec-result-text"></div>
+          <div class="result-actions">
+            <button id="dec-copy" class="btn btn-sm" style="background:transparent;color:var(--green);border:1px solid rgba(57,255,20,0.3);font-family:var(--font-mono);font-size:0.7rem;cursor:pointer;border-radius:3px;padding:6px 14px;">COPY</button>
+            <button id="dec-download" class="btn btn-sm" style="background:transparent;color:var(--cyan);border:1px solid rgba(0,245,255,0.3);font-family:var(--font-mono);font-size:0.7rem;cursor:pointer;border-radius:3px;padding:6px 14px;">DOWNLOAD</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- /panels -->
+
+    <!-- ── Info footer ───────────────────────────────────────────── -->
+    <div style="text-align:center;margin-top:40px;padding-bottom:40px;">
+      <p class="font-mono" style="font-size:0.68rem;color:WHITE;letter-spacing:0.1em;">
+        ⬡ PHANTOMBYTE · FERNET (AES-128-CBC + HMAC-SHA256) · ALL DATA ENCRYPTED IN TRANSIT AND AT REST
+      </p>
+    </div>
+
+  </main>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

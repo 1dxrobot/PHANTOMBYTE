@@ -20,9 +20,12 @@ app.config['MAIL_SERVER']   = 'smtp.gmail.com'
 app.config['MAIL_PORT']     = 587
 app.config['MAIL_USE_TLS']  = True
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME', 'idrenemdiyaagirbek@gmail.com')
-app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD', 'apav kyot azog lagw')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD', 'qqcq tucr hgxf ulti')
 app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_USERNAME', 'idrenemdiyaagirbek@gmail.com')
 mail = Mail(app)
+
+
+
 
 # ── Encryption key (store securely in production) ────────────────────────────
 KEY_FILE = "secret.key"
